@@ -7,7 +7,7 @@ eye_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_eye.xml')
 smile_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_smile.xml')
 
 
-recognizer = cv2.face.LBPHFaceRecognizer_create()
+recognizer = cv2.face_LBPHFaceRecognizer.create()
 recognizer.read("./recognizers/face-trainner.yml")
 
 labels = {"person_name": 1}
