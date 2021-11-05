@@ -21,7 +21,7 @@ while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
     gray  = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5, minSize=(30,30))
     for (x, y, w, h) in faces:
     	#print(x,y,w,h)
     	roi_gray = gray[y:y+h, x:x+w] #(ycord_start, ycord_end)

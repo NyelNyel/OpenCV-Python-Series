@@ -33,8 +33,8 @@ def contact():
 ###################################################################################
 
 def check_haarcascadefile():
-    exists = os.path.isfile("haarcascade_frontalface_default.xml")
-    if exists:
+    exists = os.path.isfile('cascades/data/haarcascade_frontalface_alt2.xml')
+    if exists: 
         pass
     else:
         mess._show(title='Some file missing', message='Please contact us for help')
@@ -146,7 +146,7 @@ def clear2():
 
 def TakeImages():
     check_haarcascadefile()
-    columns = ['SERIAL NO.', '', 'ID', '', 'NAME']
+    columns = ['Student ID', '', 'Year&Section', '', 'Name']
     assure_path_exists("StudentDetails/")
     assure_path_exists("TrainingImage/")
     serial = 0
@@ -168,7 +168,7 @@ def TakeImages():
     name = (txt2.get())
     if ((name.isalpha()) or (' ' in name)):
         cam = cv2.VideoCapture(0)
-        harcascadePath = "haarcascade_frontalface_default.xml"
+        harcascadePath = "cascades/data/haarcascade_frontalface_alt2.xml"
         detector = cv2.CascadeClassifier(harcascadePath)
         sampleNum = 0
         while (True):
@@ -209,16 +209,16 @@ def TakeImages():
 def TrainImages():
     check_haarcascadefile()
     assure_path_exists("TrainingImageLabel/")
-    recognizer = cv2.face_LBPHFaceRecognizer.create()
-    harcascadePath = "haarcascade_frontalface_default.xml"
-    detector = cv2.CascadeClassifier(harcascadePath)
+    recognizer = cv2.face.LBPHFaceRecognizer_create()
+    harcascadePath = "cascades/data/haarcascade_frontalface_alt2.xml"
+    detector = cv2.CascadeClassifier(harcascadePath) 
     faces, ID = getImagesAndLabels("TrainingImage")
     try:
         recognizer.train(faces, np.array(ID))
     except:
         mess._show(title='No Registrations', message='Please Register someone first!!!')
         return
-    recognizer.save("TrainingImageLabel\Trainner.yml")
+    recognizer.save("recognizers/face-trainner.yml")
     res = "Profile Saved Successfully"
     message1.configure(text=res)
     message.configure(text='Total Registrations till now  : ' + str(ID[0]))
@@ -263,7 +263,7 @@ def TrackImages():
     else:
         mess._show(title='Data Missing', message='Please click on Save Profile to reset data!!')
         return
-    harcascadePath = "haarcascade_frontalface_default.xml"
+    harcascadePath = "cascades/data/haarcascade_frontalface_alt2.xml"
     faceCascade = cv2.CascadeClassifier(harcascadePath);
 
     cam = cv2.VideoCapture(0)
