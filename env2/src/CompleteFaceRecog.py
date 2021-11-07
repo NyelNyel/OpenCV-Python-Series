@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox as mess
 import tkinter.simpledialog as tsd
-import cv2,os
+import cv2, os
 import csv
 import numpy as np
 from PIL import Image
@@ -185,7 +185,7 @@ def TakeImages():
                 # display the frame
                 cv2.imshow('Taking Images', img)
             # wait for 100 miliseconds
-            if cv2.waitKey(100) & 0xFF == ord('q'):
+            if cv2.waitKey(100) & 0xFF == ord ('q'):
                 break
             # break if the sample number is morethan 100
             elif sampleNum > 100:
@@ -264,11 +264,11 @@ def TrackImages():
         mess._show(title='Data Missing', message='Please click on Save Profile to reset data!!')
         return
     harcascadePath = "cascades/data/haarcascade_frontalface_alt2.xml"
-    faceCascade = cv2.CascadeClassifier(harcascadePath);
+    faceCascade = cv2.CascadeClassifier(harcascadePath)
 
     cam = cv2.VideoCapture(0)
     font = cv2.FONT_HERSHEY_SIMPLEX
-    col_names = ['Id', '', 'Name', '', 'Date', '', 'Time']
+    col_names = ['Student ID', '', 'Name', '', 'Date', '', 'Time']
     exists1 = os.path.isfile("StudentDetails\StudentDetails.csv")
     if exists1:
         df = pd.read_csv("StudentDetails\StudentDetails.csv")
@@ -289,7 +289,7 @@ def TrackImages():
                 date = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y')
                 timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
                 aa = df.loc[df['SERIAL NO.'] == serial]['NAME'].values
-                ID = df.loc[df['SERIAL NO.'] == serial]['ID'].values
+                ID = df.loc[df['SERIAL NO.'] == serial]['Student ID'].values
                 ID = str(ID)
                 ID = ID[1:-1]
                 bb = str(aa)
@@ -439,7 +439,7 @@ tv.column('name',width=130)
 tv.column('date',width=133)
 tv.column('time',width=133)
 tv.grid(row=2,column=0,padx=(0,0),pady=(150,0),columnspan=4)
-tv.heading('#0',text ='ID')
+tv.heading('#0',text ='Student ID')
 tv.heading('name',text ='NAME')
 tv.heading('date',text ='DATE')
 tv.heading('time',text ='TIME')
