@@ -2,6 +2,7 @@ import cv2
 import os
 import numpy as np
 from PIL import Image
+import pandas as pd
 import pickle
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
