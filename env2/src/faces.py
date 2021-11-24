@@ -1,5 +1,5 @@
-import numpy as np
 import cv2
+import numpy as np
 import pickle
 
 face_cascade = cv2.CascadeClassifier('cascades/data/haarcascade_frontalface_alt2.xml')
@@ -38,7 +38,7 @@ while(True):
     		stroke = 2
     		cv2.putText(frame, name, (x,y), font, 1, color, stroke, cv2.LINE_AA)
 
-    	img_item = "7.png"
+    	img_item = "Tst.png"
     	cv2.imwrite(img_item, roi_color)
 
     	color = (255, 0, 0) #BGR 0-255 

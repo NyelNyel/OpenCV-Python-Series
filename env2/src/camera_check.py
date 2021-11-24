@@ -9,9 +9,13 @@ def camer():
 
     while True:
         # Read the frame
-        _, img = cap.read()
+        ret, img = cap.read()
+        if not ret:
+            print("failed to grab frame")
+            break
+        cv2.imshow("test", img)
+        cv2.imshow('Gray Image', gray)
 
-        # Convert to grayscale
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Detect the faces
@@ -26,6 +30,10 @@ def camer():
 
         # Stop if escape key is pressed
         if cv2.waitKey(20) & 0xFF == ord('q'):
+            img_name = "opencv_frame_{}.png".format(cap)
+            cv2.imwrite(img_name, img)
+            print("{} written!".format(img_name))
+            cap +=1
             break
 
     # Release the VideoCapture object

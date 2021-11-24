@@ -146,7 +146,7 @@ def clear2():
 
 def TakeImages():
     check_haarcascadefile()
-    columns = ['Student ID', '', 'Year&Section', '', 'Name']
+    columns = ['Id', '', 'Year&Section', '', 'Name']
     assure_path_exists("StudentDetails/")
     assure_path_exists("TrainingImage/")
     serial = 0
@@ -218,7 +218,7 @@ def TrainImages():
     except:
         mess._show(title='No Registrations', message='Please Register someone first!!!')
         return
-    recognizer.save("recognizers/face-trainner.yml")
+    recognizer.save("TrainingImageLabel\Trainner.yml")
     res = "Profile Saved Successfully"
     message1.configure(text=res)
     message.configure(text='Total Registrations till now  : ' + str(ID[0]))
@@ -280,7 +280,7 @@ def TrackImages():
     while True:
         ret, im = cam.read()
         gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
-        faces = faceCascade.detectMultiScale(gray, 1.2, 5)
+        faces = faceCascade.detectMultiScale(gray, 1.3, 5)
         for (x, y, w, h) in faces:
             cv2.rectangle(im, (x, y), (x + w, y + h), (225, 0, 0), 2)
             serial, conf = recognizer.predict(gray[y:y + h, x:x + w])
@@ -289,7 +289,7 @@ def TrackImages():
                 date = datetime.datetime.fromtimestamp(ts).strftime('%d-%m-%Y')
                 timeStamp = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
                 aa = df.loc[df['SERIAL NO.'] == serial]['NAME'].values
-                ID = df.loc[df['SERIAL NO.'] == serial]['Student ID'].values
+                ID = df.loc[df['SERIAL NO.'] == serial]['Id'].values
                 ID = str(ID)
                 ID = ID[1:-1]
                 bb = str(aa)
@@ -439,7 +439,7 @@ tv.column('name',width=130)
 tv.column('date',width=133)
 tv.column('time',width=133)
 tv.grid(row=2,column=0,padx=(0,0),pady=(150,0),columnspan=4)
-tv.heading('#0',text ='Student ID')
+tv.heading('#0',text ='Id')
 tv.heading('name',text ='NAME')
 tv.heading('date',text ='DATE')
 tv.heading('time',text ='TIME')
@@ -456,9 +456,9 @@ clearButton = tk.Button(frame2, text="Clear", command=clear  ,fg="black"  ,bg="#
 clearButton.place(x=335, y=86)
 clearButton2 = tk.Button(frame2, text="Clear", command=clear2  ,fg="black"  ,bg="#ea2a2a"  ,width=11 , activebackground = "white" ,font=('times', 11, ' bold '))
 clearButton2.place(x=335, y=172)    
-takeImg = tk.Button(frame2, text="Take Images", command=TakeImages  ,fg="black"  ,bg="#F5FD03"  ,width=34  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
+takeImg = tk.Button(frame2, text="Take Images", command=TakeImages  ,fg="white"  ,bg="blue"  ,width=34  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
 takeImg.place(x=30, y=300)
-trainImg = tk.Button(frame2, text="Save Profile", command=psw ,fg="black"  ,bg="#F5FD03"  ,width=34  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
+trainImg = tk.Button(frame2, text="Save Profile", command=psw ,fg="white"  ,bg="blue"  ,width=34  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
 trainImg.place(x=30, y=380)
 trackImg = tk.Button(frame1, text="Take Attendance", command=TrackImages  ,fg="black"  ,bg="#1AFD03"  ,width=35  ,height=1, activebackground = "white" ,font=('times', 15, ' bold '))
 trackImg.place(x=30,y=50)
